@@ -10,11 +10,16 @@ const expected = {
 };
 
 describe(' Testa a função getMagicCard', () => {
-  it('Deve retornar um objeto com as propriedades esperadas', () => {
+  it('Deve retornar um objeto com as propriedades esperadas', async () => {
     const getMagicCardSimulator = trybeSimulator(magic, 'getMagicCard');
-    await getMagicCardSimulator('130550');
-
-    // implemente seus testes aqui    
-   
+    const result = await getMagicCardSimulator('130550');
+    
+    // implemente seus testes aqui
+    expect(result).toEqual(expected);
+    expect(Array.isArray(result.types)).toBe(true);
+    expect(result.subtypes.length).toBe(2);
+    expect(result.rarity).toBe("Uncommon");
+    expect(result.name).toBe("Ancestor's Chosen");
+    expect(result.manaCost).toBe('{5}{W}{W}');
   });
 });
